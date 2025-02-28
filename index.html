@@ -103,9 +103,9 @@
     </style>
     <script>
         window.onload = function() {
-            const message = "Move your cursor to the 'Hey' container that has a surprise for you!";
+            const message = " tap the it  that has a surprise for you!";
             if (responsiveVoice.voiceSupport()) {
-                responsiveVoice.speak(message, "UK English Female");
+                responsiveVoice.speak(message, "UK English male");
             } else {
                 console.error("ResponsiveVoice is not supported in this browser.");
             }
@@ -120,7 +120,7 @@
             <button type="submit" id="submitButton">Submit</button>
         </form>
     </div>
-    <p id="errorMessage">Incorrect code. Please try again.</p>
+    <p id="errorMessage">not authorised user Please try again.</p>
     
     <script>
         const textInput = document.getElementById('textInput');

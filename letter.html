@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Surprise</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include ResponsiveVoice.js with your API key -->
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=9ECkDVBC"></script>
+    <style>
+        /* Your existing CSS styles */
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background:#ed76bc;
+            transition: background 1.5s;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            position: relative;
+        }
+        .switch {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #B0C4DE, #FFB6C1);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border-radius: 50px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease-in-out;
+        }
+        .switch:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
+            background: rgb(234, 226, 226);
+        }
+        .message {
+            display: none;
+            width: 300px;
+            height: 200px;
+            background: black;
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .message::before {
+            content: "\2709\FE0F";
+            font-size: 50px;
+        }
+        .letter-container {
+            display: none;
+            width: 400px;
+            height: 300px;
+            background: linear-gradient(135deg, #B0C4DE, #FFB6C1);
+            color: black;
+            border-radius: 20px;
+            box-shadow: 5px 5px 15px rgba(200, 120, 229, 0.3);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+            font-family: 'Georgia', serif;
+            line-height: 1.5;
+            text-align: justify;
+            padding: 20px;
+            transition: transform 1s ease-in-out;
+            overflow-y: auto;
+        }
+        .letter {
+            opacity: 0;
+            transform: translateY(100%);
+            transition: opacity 2s ease-in-out, transform 2s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Initial alert
+        alert("Hi! I will guide you. First, click the button that appears now, OK to continue!");
+    </script>
+    <div class="container">
+        <input type="checkbox" id="messageState" hidden>
+        <label for="messageState" class="switch" id="switchBtn">welcome Neha </label>
+        <div class="message" id="message" style="display: none;"></div>
+        <div class="letter-container" id="letterContainer">
+            <div class="letter" id="letter">Happy birthday Neha&#9825;,<br><br>
+                Happy birthday Disney Princess this is a day to celebrate and widen your charm. never ever doubt your self you are the best i ever known . Remember that you are capable, strong, and deserving of all the love &#9825; and happiness in the world. The things in between us havent gone in the way  i thought and other Opinions were mattered at that point of time and u thats okay .. hahhaaaa . Never stop dreaming, and never stop believing in the magic of new beginnings. You are loved, cherished, and appreciated more than you know. Keep shining!<br><br>With love, Someone Who Cares.
+            </div>
+        </div>
+    </div>
+    <script>
+        // Function to speak text using ResponsiveVoice.js
+        function speak(text) {
+            if (typeof responsiveVoice !== "undefined") {
+                responsiveVoice.speak(text, "UK English Female", {rate: 1, pitch: 1, volume: 1});
+            } else {
+                alert("Text-to-speech is not supported in your browser.");
+            }
+        }
+
+        // Button click event
+        $("#messageState").on("change", function() {
+            if ($(this).is(":checked")) {
+                $("body").css("background", "black");
+                $("#switchBtn").fadeOut(function() {
+                    $("#message").fadeIn();
+                    // Speak the next instruction
+                    speak("Welcome Neha I am waiting for you!");
+                });
+            }
+        });
+
+        // Message click event
+        $("#message").on("click", function() {
+            $(this).fadeOut();
+            $("#letterContainer").css("display", "block");
+            setTimeout(function() {
+                $("#letter").css({"opacity": "1", "transform": "translateY(0)"});
+                // Speak the letter content
+                const letterText = $("#letter").text().replace(/\n/g, " "); // Replace line breaks with spaces
+                speak(letterText);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
